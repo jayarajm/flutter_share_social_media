@@ -3,8 +3,6 @@ import 'dart:async';
 import 'dart:ui' as ui;
 import 'dart:typed_data';
 import 'package:flutter/rendering.dart';
-import 'dart:io';
-import 'package:flutter/services.dart' show rootBundle;
 
 import 'package:flutter/services.dart';
 import 'package:flutter_share_social_media/flutter_share_social_media.dart';
@@ -79,6 +77,14 @@ class _MyAppState extends State<MyApp> {
                   ),
                   width: 100,
                   height: 50,
+                ),
+                Container(
+                  child: RaisedButton(
+                    onPressed: shareSheet,
+                    child: Text("Share Sheet"),
+                  ),
+                  width: 100,
+                  height: 50,
                 )
               ],
             ),
@@ -92,20 +98,32 @@ class _MyAppState extends State<MyApp> {
   }
 
   shareFacebook() async {
-    RenderRepaintBoundary boundary =
-        _globalKey.currentContext.findRenderObject();
-    ui.Image image = await boundary.toImage();
-    ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-    await FlutterShareSocialMedia.shareFacebook(byteData.buffer.asUint8List());
-    // print(result);
+    ByteData byteData = await getGloableImageData();
+    String result  = await FlutterShareSocialMedia.share(
+        ShareType.facebook, 
+        byteData.buffer.asUint8List(), 
+        "caption");
+    print(result);
   }
 
   shareInstagram() async {
+    ByteData byteData = await getGloableImageData();
+    String result = await FlutterShareSocialMedia.share(
+        ShareType.instagram, byteData.buffer.asUint8List(), "caption");
+    print(result);
+  }
+
+  shareSheet() async {
+    ByteData byteData = await getGloableImageData();
+    String result = await FlutterShareSocialMedia.share(
+        ShareType.more, byteData.buffer.asUint8List(), "caption");
+    print(result);
+  }
+
+  Future<ByteData> getGloableImageData() async {
     RenderRepaintBoundary boundary =
         _globalKey.currentContext.findRenderObject();
     ui.Image image = await boundary.toImage();
-    ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-    await FlutterShareSocialMedia.shareInstagram(byteData.buffer.asUint8List());
-    // print(result);
+   return await image.toByteData(format: ui.ImageByteFormat.png);
   }
 }

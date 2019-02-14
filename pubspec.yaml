@@ -1,8 +1,8 @@
 name: flutter_share_social_media
 description: A new Flutter plugin for share image and text in social media
-version: 0.0.1
-author:
-homepage:
+version: 0.0.2
+author: jayaraj <rajjaya566@gmail.com>
+homepage: https://github.com/jayarajm/flutter_share_social_media
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
