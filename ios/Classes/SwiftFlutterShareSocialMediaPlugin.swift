@@ -1,7 +1,5 @@
 import Flutter
 import UIKit
-import FacebookShare
-import FBSDKShareKit
 
 public class SwiftFlutterShareSocialMediaPlugin: NSObject, FlutterPlugin {
     var result: FlutterResult?
@@ -42,6 +40,7 @@ public class SwiftFlutterShareSocialMediaPlugin: NSObject, FlutterPlugin {
     }
     
     private func shareFacebook(withImage image: UIImage?, caption: String) {
+        /* TODO: Remove facebook share 
         DispatchQueue.main.async {
             func isFBInstalled() -> Bool {
                 var components = URLComponents()
@@ -66,6 +65,7 @@ public class SwiftFlutterShareSocialMediaPlugin: NSObject, FlutterPlugin {
                 self.result?("Cannot find facebook app")
             }
         }
+        */
     }
     
     private func shareInstagram(withImage image: UIImage?, caption: String) {

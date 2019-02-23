@@ -15,8 +15,6 @@ A new Flutter plugin for share image and text in social media
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
-  s.dependency 'FacebookCore'
-  s.dependency 'FacebookShare'
 
   s.ios.deployment_target = '8.0'
 end
