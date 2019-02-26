@@ -1,6 +1,7 @@
 #
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
 #
+
 Pod::Spec.new do |s|
   s.name             = 'flutter_share_social_media'
   s.version          = '0.0.1'
@@ -15,6 +16,9 @@ A new Flutter plugin for share image and text in social media
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
+  s.dependency 'FacebookCore'
+  s.dependency 'FacebookShare'
 
   s.ios.deployment_target = '8.0'
+  s.static_framework = true
 end

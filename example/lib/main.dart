@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_share_social_media/flutter_share_social_media.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
 void main() => runApp(MyApp());
 
@@ -85,6 +86,14 @@ class _MyAppState extends State<MyApp> {
                   ),
                   width: 100,
                   height: 50,
+                ),
+                Container(
+                  child: RaisedButton(
+                    onPressed: initiateFacebookLogin,
+                    child: Text("Facebook login"),
+                  ),
+                  width: 100,
+                  height: 50,
                 )
               ],
             ),
@@ -99,10 +108,8 @@ class _MyAppState extends State<MyApp> {
 
   shareFacebook() async {
     ByteData byteData = await getGloableImageData();
-    String result  = await FlutterShareSocialMedia.share(
-        ShareType.facebook, 
-        byteData.buffer.asUint8List(), 
-        "caption");
+    String result = await FlutterShareSocialMedia.share(
+        ShareType.facebook, byteData.buffer.asUint8List(), "caption");
     print(result);
   }
 
@@ -120,10 +127,35 @@ class _MyAppState extends State<MyApp> {
     print(result);
   }
 
+  initiateFacebookLogin() async {
+    final facebookLogin = FacebookLogin();
+    facebookLogin.loginBehavior = FacebookLoginBehavior.webViewOnly;
+    final facebookLoginResult =
+        await facebookLogin.logInWithReadPermissions(['email', 'user_friends']);
+    switch (facebookLoginResult.status) {
+      case FacebookLoginStatus.cancelledByUser:
+        break; // do nothing
+      case FacebookLoginStatus.error:
+        // await showErrorDialog(context);
+        break;
+      case FacebookLoginStatus.loggedIn:
+        // change UI now that login is in progress
+        setState(() {
+          // gettingFbData = true;
+        });
+        // final fbProfile = fbApiService
+        //     .getFacebookProfile(facebookLoginResult.accessToken.token);
+        // print(fbProfile);
+        break;
+      default:
+        break;
+    }
+  }
+
   Future<ByteData> getGloableImageData() async {
     RenderRepaintBoundary boundary =
         _globalKey.currentContext.findRenderObject();
     ui.Image image = await boundary.toImage();
-   return await image.toByteData(format: ui.ImageByteFormat.png);
+    return await image.toByteData(format: ui.ImageByteFormat.png);
   }
 }
