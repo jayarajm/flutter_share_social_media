@@ -1,5 +1,6 @@
 import Flutter
 import UIKit
+import Photos
 
 public class SwiftFlutterShareSocialMediaPlugin: NSObject, FlutterPlugin {
     var result: FlutterResult?
