@@ -4,7 +4,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'flutter_share_social_media'
-  s.version          = '0.0.1'
+  s.version          = '0.0.2'
   s.summary          = 'A new Flutter plugin for share image and text in social media'
   s.description      = <<-DESC
 A new Flutter plugin for share image and text in social media
